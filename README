@@ -1,0 +1,31 @@
+Forewords
+=========
+
+This tutorial takes you a roller coaster in order for you to have some
+insight of Scala language usage, sbt build system, and akka -- one of
+the most popular frameworks built in Scala.
+
+This tutorial assumes the audience to have no knowledge and experience
+of the Java/Scala world but some basics of other worlds -- e.g. C, C++,
+Python, or whatever. I just wanted to record and share my self-taught-y
+way to learn Scala with "framework first for the first learning" mind.
+
+The target platform is GNU/Linux. Therefore, for the installation step,
+extra efforts may be required depending on your environment. Since
+I am currently running Arch, simply pacman is used.
+
+Also note that there is no IDE-specific instructions: No Eclipse or
+IntelliJ, just sbt (I don't find reasons to take efforts for learning
+any IDE which I am not sure to use beyond this tutorial).
+
+
+Installation
+============
+
+There seems no need to separately install the language Scala since the
+build tool sbt itself is capable of installing and running different
+versions of sbt and scala.
+
+Of course sbt needs Java 8
+
+$ sudo pacman -S jdk8-openjdk sbt
