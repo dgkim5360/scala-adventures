@@ -72,3 +72,16 @@ Below are sbt commands used frequently:
 The sbt documentation is quite heavy (even for the getting started
 section) and it seems beyond my level. I terminate this tutorial at the
 end of "1.g. Scopes", heading for a dive on Akka.
+
+
+Akka Quickstart with Scala
+==========================
+
+I arrive at the quickstart guide for Akka.
+(developer.lightbend.com/guides/akka-quickstart-scala/)
+
+Here it supplies the source code for the example as a zipped file to be
+downloaded. As I get that and unzip, I found that the example source
+contains sbt, which does not look good for me to experience sbt on my
+machine. Therefore I continue to work with my previous sbt project for
+"Hello World".

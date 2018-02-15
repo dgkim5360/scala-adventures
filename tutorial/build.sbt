@@ -1,5 +1,7 @@
 import Dependencies._
 
+lazy val akkaVersion = "2.5.9"
+
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
@@ -8,5 +10,9 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "Hello",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies += scalaTest % Test,
+    libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+      "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test
+    )
   )
