@@ -28,6 +28,7 @@ versions of sbt and scala.
 
 Of course sbt requires Java 8
 
+
 $ sudo pacman -S jdk8-openjdk sbt
 
 
@@ -41,6 +42,7 @@ and take the tutorial (scala-sbt.org/1.x/docs/Getting-Started.html).
 
 Hello, tutorial
 ---------------
+
 
 $ sbt new sbt/scala-seed.g8
 # If it is your first time to launch sbt, it will take a very long time
@@ -58,6 +60,7 @@ sbt:Hello> run  # must success
 sbt:Hello> test  # must success
 sbt:Hello> exit
 $
+
 
 Below are sbt commands used frequently:
 * run
@@ -85,3 +88,59 @@ downloaded. As I get that and unzip, I found that the example source
 contains sbt, which does not look good for me to experience sbt on my
 machine. Therefore I continue to work with my previous sbt project for
 "Hello World".
+
+I create two `quickstart` directories for `src/main` and `src/test` to
+write the code.
+
+
+Main class
+----------
+
+I write companions for `Painter` and `Greeter`, and the main `App`,
+reading through the Quickstart guide, from the beginning to the section
+"Full Example Code".
+
+* If you are curious of what is the companion object, please check
+"Basics" and "Basic continued" sections from "Scala Shool" provided
+by Twitter (twitter.github.io/scala_school)
+
+Then sbt detects the currently existing two main classes.
+
+
+$ sbt
+sbt:Hello> run
+[warn] Multiple main classes detected.  Run 'show discoveredMainClasses' to see the list
+
+Multiple main classes detected, select one to run:
+
+ [1] example.Hello
+ [2] quickstart.AkkaQuickstart
+
+Enter number: 2
+
+[info] Running quickstart.AkkaQuickstart
+[debug] Waiting for threads to exit or System.exit to be called.
+[debug]   Classpath:
+[debug]         /tmp/sbt_33688d6b/job-1/target/8392faf4/hello_2.12-0.1.0-SNAPSHOT.jar
+[debug]         /tmp/sbt_33688d6b/target/f2e496f2/scala-library.jar
+[debug]         /tmp/sbt_33688d6b/target/b6dc6f63/akka-actor_2.12-2.5.9.jar
+[debug]         /tmp/sbt_33688d6b/target/d6ac0ce0/config-1.3.2.jar
+[debug]         /tmp/sbt_33688d6b/target/1e6f1e74/scala-java8-compat_2.12-0.8.0.jar
+[debug] Waiting for thread run-main-0 to terminate.
+[debug]         Thread run-main-0 exited.
+[debug] Waiting for thread helloAkka-akka.actor.default-dispatcher-5 to terminate.
+[INFO] [02/15/2018 21:01:03.631] [helloAkka-akka.actor.default-dispatcher-5] [akka://helloAkka/user/printerActor] Greeting received (from Actor[akka://helloAkka/user/helloGreeter#-1074357650]): Hello, Scala
+[INFO] [02/15/2018 21:01:03.631] [helloAkka-akka.actor.default-dispatcher-5] [akka://helloAkka/user/printerActor] Greeting received (from Actor[akka://helloAkka/user/howdyGreeter#-1725949786]): Howdy, Akka
+[INFO] [02/15/2018 21:01:03.632] [helloAkka-akka.actor.default-dispatcher-5] [akka://helloAkka/user/printerActor] Greeting received (from Actor[akka://helloAkka/user/goodDayGreeter#637219822]): Good day, Play
+[INFO] [02/15/2018 21:01:03.632] [helloAkka-akka.actor.default-dispatcher-5] [akka://helloAkka/user/printerActor] Greeting received (from Actor[akka://helloAkka/user/howdyGreeter#-1725949786]): Howdy, Lightbend
+
+
+I can choose the main class to run by
+
+
+sbt:Hello> runMain quickstart.AkkaQuickstart
+
+
+I am not sure (and probably do not think) that this is a good way to
+maintain a serious Scala project, but it is good for the tutorial
+objective.
