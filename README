@@ -26,6 +26,49 @@ There seems no need to separately install the language Scala since the
 build tool sbt itself is capable of installing and running different
 versions of sbt and scala.
 
-Of course sbt needs Java 8
+Of course sbt requires Java 8
 
 $ sudo pacman -S jdk8-openjdk sbt
+
+
+sbt Tutorial
+============
+
+Before trying the Akka tutorial, at least I must learn how to use the
+build tool, namely sbt. So this time I visit the official sbt webpage
+and take the tutorial (scala-sbt.org/1.x/docs/Getting-Started.html).
+
+
+Hello, tutorial
+---------------
+
+$ sbt new sbt/scala-seed.g8
+# If it is your first time to launch sbt, it will take a very long time
+# to set up, but not again.
+
+A minimal Scala project.
+
+name [Scala Seed Project]: tutorial
+
+Template applied in ./tutorial
+
+$ cd tutorial
+$ sbt
+sbt:Hello> run  # must success
+sbt:Hello> test  # must success
+sbt:Hello> exit
+$
+
+Below are sbt commands used frequently:
+* run
+* runMain
+* test
+* compile
+* console
+* reload
+* clean
+* help <command>
+
+The sbt documentation is quite heavy (even for the getting started
+section) and it seems beyond my level. I terminate this tutorial at the
+end of "1.g. Scopes", heading for a dive on Akka.
