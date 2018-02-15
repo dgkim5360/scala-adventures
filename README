@@ -144,3 +144,52 @@ sbt:Hello> runMain quickstart.AkkaQuickstart
 I am not sure (and probably do not think) that this is a good way to
 maintain a serious Scala project, but it is good for the tutorial
 objective.
+
+
+Test class
+----------
+
+Moving on to the test, I write the code on the section "Testing Actors".
+Let's run the test.
+
+
+$ sbt
+sbt:Hello> test
+[info] Compiling 1 Scala source to tutorial/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 1 Scala source to tutorial/target/scala-2.12/test-classes ...
+[warn] there was one feature warning; re-run with -feature for details
+[warn] one warning found
+[info] Done compiling.
+[info] HelloSpec:
+[info] The Hello object
+[info] - should say hello
+[info] AkkaQuickstartSpec:
+[info] A Greeter Actor
+[info] - should pass on a greeting message when instructed to
+[info] Run completed in 1 second, 166 milliseconds.
+[info] Total number of tests run: 2
+[info] Suites: completed 2, aborted 0
+[info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 7 s, completed Feb 15, 2018 9:47:35 PM
+
+
+I find it testing two different project simultaneously. For testing only
+what I want to, `testOnly` is there.
+
+
+sbt:Hello> testOnly quickstart.AkkaQuickstartSpec
+[info] AkkaQuickstartSpec:
+[info] A Greeter Actor
+[info] - should pass on a greeting message when instructed to
+[info] Run completed in 589 milliseconds.
+[info] Total number of tests run: 1
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Feb 15, 2018 9:49:18 PM
+
+
+* The section "Testing with Specs" from the Twitter Scala School may be
+worth reading.
