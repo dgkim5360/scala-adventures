@@ -223,3 +223,15 @@ First: Actor[akka://testSystem/user/first-actor#-1174065550]
 >>> Press ENTER to exit <<<
 Second: Actor[akka://testSystem/user/first-actor/second-actor#-1246452098]
 [success] Total time: 28 s, completed Feb 16, 2018 4:39:25 PM
+
+
+1-2. Actor lifecycle
+
+sbt:Hello> runMain quickstart.ActorHierarchyExperiment2
+[info] Running quickstart.ActorHierarchyExperiment2
+>>> Press ENTER to exit <<<
+first started
+second started
+second stopped
+first stopped
+[success] Total time: 53 s, completed Feb 16, 2018 4:50:51 PM
