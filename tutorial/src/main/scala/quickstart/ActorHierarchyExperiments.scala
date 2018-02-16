@@ -24,3 +24,13 @@ object ActorHierarchyExperiment2 extends App {
   try StdIn.readLine()
   finally system.terminate()
 }
+
+object ActorHierarchyExperiment3 extends App {
+  val system = ActorSystem("testSystem")
+  val supervisingActor = system.actorOf(Props[SupervisingActor], "supervising-actor")
+  supervisingActor ! "failChild"
+
+  println(">>> Press ENTER to exit <<<")
+  try StdIn.readLine()
+  finally system.terminate()
+}

@@ -235,3 +235,32 @@ second started
 second stopped
 first stopped
 [success] Total time: 53 s, completed Feb 16, 2018 4:50:51 PM
+
+1-3. Failure handling
+
+sbt:Hello> runMain quickstart.ActorHierarchyExperiment3
+[info] Running quickstart.ActorHierarchyExperiment3
+>>> Press ENTER to exit <<<
+supervised actor started
+supervised actor fails now
+supervised actor stopped
+[ERROR] [02/16/2018 17:02:20.570] [testSystem-akka.actor.default-dispatcher-3] [akka://testSystem/user/supervising-actor/supervised-actor] I failed!
+java.lang.Exception: I failed!
+        at quickstart.SupervisedActor$$anonfun$receive$4.applyOrElse(ExperimentalActors.scala:49)
+        at akka.actor.Actor.aroundReceive(Actor.scala:517)
+        at akka.actor.Actor.aroundReceive$(Actor.scala:515)
+        at quickstart.SupervisedActor.aroundReceive(ExperimentalActors.scala:42)
+        at akka.actor.ActorCell.receiveMessage(ActorCell.scala:527)
+        at akka.actor.ActorCell.invoke(ActorCell.scala:496)
+        at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:257)
+        at akka.dispatch.Mailbox.run(Mailbox.scala:224)
+        at akka.dispatch.Mailbox.exec(Mailbox.scala:234)
+        at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+        at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+        at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+        at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+
+supervised actor started
+[success] Total time: 6 s, completed Feb 16, 2018 5:02:26 PM
+
+This example shows the auto-restarting strategy of the actor system.
