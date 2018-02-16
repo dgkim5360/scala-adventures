@@ -264,3 +264,16 @@ supervised actor started
 [success] Total time: 6 s, completed Feb 16, 2018 5:02:26 PM
 
 This example shows the auto-restarting strategy of the actor system.
+
+
+Part 2. Creating the First Actor
+--------------------------------
+
+The IoT example begins and I will have a single top-level actor in a
+brand-new `tutorial` directory.
+
+sbt:IoT> runMain tutorial.IotApp
+[info] Running tutorial.IotApp
+[INFO] [02/16/2018 17:23:05.947] [iot-system-akka.actor.default-dispatcher-2] [akka://iot-system/user/iot-supervisor] IoT Application started
+[INFO] [02/16/2018 17:23:27.984] [iot-system-akka.actor.default-dispatcher-3] [akka://iot-system/user/iot-supervisor] IoT Application stopped
+[success] Total time: 23 s, completed Feb 16, 2018 5:23:28 PM
