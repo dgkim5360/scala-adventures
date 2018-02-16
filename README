@@ -193,3 +193,33 @@ sbt:Hello> testOnly quickstart.AkkaQuickstartSpec
 
 * The section "Testing with Specs" from the Twitter Scala School may be
 worth reading.
+
+
+Akka Tutorial: IoT Example use case
+===================================
+
+Now let's dive into the more serious example.
+(doc.akka.io/docs/akka/current/guide/tutorial.html)
+
+
+Part 1. Actor Architecture
+--------------------------
+
+This part explains how the actor system constructs the actor
+architecture and shows the actors' references via the lifecycle hooks of
+the actors. Also it tells me how the system deals with the actor
+failures.
+
+Yes, everything is done through messages.
+
+Since this part has nothing to do with the IoT example, I continue to
+add the code to the previous example directory `quickstart`.
+
+1-1. Actor Architecture
+
+sbt:Hello> runMain quickstart.ActorHierarchyExperiment1
+[info] Running quickstart.ActorHierarchyExperiment1
+First: Actor[akka://testSystem/user/first-actor#-1174065550]
+>>> Press ENTER to exit <<<
+Second: Actor[akka://testSystem/user/first-actor/second-actor#-1246452098]
+[success] Total time: 28 s, completed Feb 16, 2018 4:39:25 PM
