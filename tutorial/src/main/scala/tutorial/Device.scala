@@ -26,6 +26,15 @@ with ActorLogging {
     log.info("Device actor {}-{} stopped", groupId, deviceId)
 
   override def receive: Receive = {
+    case DeviceManager.RequestTrackDevice(`groupId`, `deviceId`) =>
+      sender() ! DeviceManager.DeviceRegistered
+
+    case DeviceManager.RequestTrackDevice(groupId, deviceId) =>
+      log.warning(
+        "Ignoring TrackDevice request for {}-{}. This actor is responsible for {}-{}",
+        groupId, deviceId, this.groupId, this.deviceId
+      )
+
     case RecordTemperature(id, value) =>
       log.info("Recorded temperature reading {} with {}", value, id)
       lastTemperatureReading = Some(value)

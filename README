@@ -314,3 +314,101 @@ sbt:IoT> testOnly tutorial.DeviceSpec
 [info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [success] Total time: 3 s, completed Feb 17, 2018 1:11:33 PM
+
+
+Part 4. Working with Device Groups
+----------------------------------
+
+This part shows the following types of converation patterns:
+1. Request-respond (for temperature recordings)
+2. Delegate-respond (for registration of devices)
+3. Create-watch-terminate (for creating the group and device actors as
+                           children)
+
+Since the example code on the documentation does not fully reveal
+itself, I decide to run through the documentation and write the code
+(for source and test) at once.
+
+* `!` and `tell`
+doc.akka.io/docs/akka/current/actors.html#send-messages
+doc.akka.io/api/akka/current/akka/actor/ActorRef.html
+* `Map` and `Set`
+twitter.github.io/scala_school/collections.html
+* Pattern matching with backticks
+stackoverflow.com/questions/6576594
+
+
+sbt:IoT> testOnly tutorial.DeviceSpec
+[INFO] [02/17/2018 16:39:14.450] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$a] Device actor group-device started
+[INFO] [02/17/2018 16:39:14.477] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$b] Device actor groups-device started
+[INFO] [02/17/2018 16:39:14.478] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$b] Recorded temperature reading 24.0 with 1
+[INFO] [02/17/2018 16:39:14.480] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$b] Recorded temperature reading 55.0 with 3
+[INFO] [02/17/2018 16:39:14.494] [part3system-akka.actor.default-dispatcher-5] [akka://part3system/user/$c] Device actor group-device started
+[INFO] [02/17/2018 16:39:14.508] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$d] Device actor group-device started
+[WARN] [02/17/2018 16:39:14.512] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$d] Ignoring TrackDevice request for wrongGroup-device. This actor is responsible for group-device
+[WARN] [02/17/2018 16:39:15.009] [part3system-akka.actor.default-dispatcher-5] [akka://part3system/user/$d] Ignoring TrackDevice request for group-wrongDevice. This actor is responsible for group-device
+G[INFO] [02/17/2018 16:39:15.565] [part3system-akka.actor.default-dispatcher-5] [akka://part3system/user/$a] Device actor group-device stopped
+[INFO] [02/17/2018 16:39:15.565] [part3system-akka.actor.default-dispatcher-4] [akka://part3system/user/$c] Device actor group-device stopped
+[INFO] [02/17/2018 16:39:15.565] [part3system-akka.actor.default-dispatcher-3] [akka://part3system/user/$b] Device actor groups-device stopped
+[INFO] [02/17/2018 16:39:15.566] [part3system-akka.actor.default-dispatcher-6] [akka://part3system/user/$d] Device actor group-device stopped
+[info] DeviceSpec:
+[info] Device actor
+[info] - must reply with empty reading if no temperature is known
+[info] - must reply with latest temperature reading
+[info] - must reply to registration requests
+[info] - must ignore wrong registration requesets
+[info] Run completed in 1 second, 644 milliseconds.
+[info] Total number of tests run: 4
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 4, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 2 s, completed Feb 17, 2018 4:39:15 PM
+
+
+sbt:IoT> testOnly tutorial.DeviceGroupSpec
+[INFO] [02/17/2018 16:40:09.077] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$a] DeviceGroup group started
+[INFO] [02/17/2018 16:40:09.078] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$a] Creating device actor for device1
+[INFO] [02/17/2018 16:40:09.080] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$a/device-device1] Device actor group-device1 started
+[INFO] [02/17/2018 16:40:09.084] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$a] Creating device actor for device2
+[INFO] [02/17/2018 16:40:09.084] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$a/device-device2] Device actor group-device2 started
+[INFO] [02/17/2018 16:40:09.108] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$b] DeviceGroup groups started
+[WARN] [02/17/2018 16:40:09.109] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$b] Ignoring TrackDevice request for wrongGroup. This actor is responsible for groups.
+[INFO] [02/17/2018 16:40:09.629] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$c] DeviceGroup group started
+[INFO] [02/17/2018 16:40:09.630] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$c] Creating device actor for device
+[INFO] [02/17/2018 16:40:09.632] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$c/device-device] Device actor group-device started
+[INFO] [02/17/2018 16:40:09.652] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$d] DeviceGroup group started
+[INFO] [02/17/2018 16:40:09.652] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$d] Creating device actor for device1
+[INFO] [02/17/2018 16:40:09.653] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$d/device-device1] Device actor group-device1 started
+[INFO] [02/17/2018 16:40:09.653] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$d] Creating device actor for device2
+[INFO] [02/17/2018 16:40:09.655] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$d/device-device2] Device actor group-device2 started
+[INFO] [02/17/2018 16:40:09.670] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$e] DeviceGroup group started
+[INFO] [02/17/2018 16:40:09.670] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$e] Creating device actor for device1
+[INFO] [02/17/2018 16:40:09.670] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$e/device-device1] Device actor group-device1 started
+[INFO] [02/17/2018 16:40:09.671] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$e] Creating device actor for device2
+[INFO] [02/17/2018 16:40:09.671] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$e/device-device2] Device actor group-device2 started
+[INFO] [02/17/2018 16:40:09.677] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$e/device-device1] Device actor group-device1 stopped
+[INFO] [02/17/2018 16:40:09.686] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$e] Device actor for device1 has been terminated
+[INFO] [02/17/2018 16:40:09.698] [part4system-akka.actor.default-dispatcher-2] [akka://part4system/user/$b] DeviceGroup groups stopped
+[INFO] [02/17/2018 16:40:09.700] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$a/device-device2] Device actor group-device2 stopped
+[INFO] [02/17/2018 16:40:09.700] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$a/device-device1] Device actor group-device1 stopped
+[INFO] [02/17/2018 16:40:09.702] [part4system-akka.actor.default-dispatcher-3] [akka://part4system/user/$a] DeviceGroup group stopped
+[INFO] [02/17/2018 16:40:09.702] [part4system-akka.actor.default-dispatcher-6] [akka://part4system/user/$c/device-device] Device actor group-device stopped
+[INFO] [02/17/2018 16:40:09.703] [part4system-akka.actor.default-dispatcher-5] [akka://part4system/user/$c] DeviceGroup group stopped
+[INFO] [02/17/2018 16:40:09.704] [part4system-akka.actor.default-dispatcher-11] [akka://part4system/user/$d/device-device1] Device actor group-device1 stopped
+[INFO] [02/17/2018 16:40:09.704] [part4system-akka.actor.default-dispatcher-4] [akka://part4system/user/$e/device-device2] Device actor group-device2 stopped
+[INFO] [02/17/2018 16:40:09.704] [part4system-akka.actor.default-dispatcher-6] [akka://part4system/user/$d/device-device2] Device actor group-device2 stopped
+[INFO] [02/17/2018 16:40:09.704] [part4system-akka.actor.default-dispatcher-11] [akka://part4system/user/$d] DeviceGroup group stopped
+[INFO] [02/17/2018 16:40:09.704] [part4system-akka.actor.default-dispatcher-7] [akka://part4system/user/$e] DeviceGroup group stopped
+[info] DeviceGroupSpec:
+[info] DeviceGroup actor
+[info] - must be able to register a device actor
+[info] - must ignore requests in wrong groupId
+[info] - must return same actor for same deviceId
+[info] - must be able to list active devices
+[info] - must be able to list active devices after one shuts down
+[info] Run completed in 1 second, 89 milliseconds.
+[info] Total number of tests run: 5
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Feb 17, 2018 4:40:09 PM
