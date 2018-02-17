@@ -293,16 +293,24 @@ visit the github repository[1] and the documentation on testing[2].
 [1] github.com/akka/akka/blob/master/akka-docs/src/test/scala/tutorial_3/DeviceSpec.scala
 [2] doc.akka.io/docs/akka/current/testing.html
 
+* What is `Option`?
+twitter.github.io/scala_school/collections.html#Option
+
 
 sbt:IoT> testOnly tutorial.DeviceSpec
-[INFO] [02/17/2018 12:45:05.193] [part3system-akka.actor.default-dispatcher-3] [akka://part3system/user/$a] Device actor group-device started
-[INFO] [02/17/2018 12:45:05.230] [part3system-akka.actor.default-dispatcher-5] [akka://part3system/user/$a] Device actor group-device stopped
+[INFO] [02/17/2018 13:11:32.988] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$a] Device actor group-device started
+[INFO] [02/17/2018 13:11:33.022] [part3system-akka.actor.default-dispatcher-4] [akka://part3system/user/$b] Device actor groups-device started
+[INFO] [02/17/2018 13:11:33.023] [part3system-akka.actor.default-dispatcher-4] [akka://part3system/user/$b] Recorded temperature reading 24.0 with 1
+[INFO] [02/17/2018 13:11:33.026] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$b] Recorded temperature reading 55.0 with 3
+[INFO] [02/17/2018 13:11:33.047] [part3system-akka.actor.default-dispatcher-2] [akka://part3system/user/$a] Device actor group-device stopped
+[INFO] [02/17/2018 13:11:33.047] [part3system-akka.actor.default-dispatcher-3] [akka://part3system/user/$b] Device actor groups-device stopped
 [info] DeviceSpec:
 [info] Device actor
 [info] - must reply with empty reading if no temperature is known
-[info] Run completed in 717 milliseconds.
-[info] Total number of tests run: 1
+[info] - must reply with latest temperature reading
+[info] Run completed in 639 milliseconds.
+[info] Total number of tests run: 2
 [info] Suites: completed 1, aborted 0
-[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
-[success] Total time: 1 s, completed Feb 17, 2018 12:45:05 PM
+[success] Total time: 3 s, completed Feb 17, 2018 1:11:33 PM
