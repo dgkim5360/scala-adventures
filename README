@@ -277,3 +277,32 @@ sbt:IoT> runMain tutorial.IotApp
 [INFO] [02/16/2018 17:23:05.947] [iot-system-akka.actor.default-dispatcher-2] [akka://iot-system/user/iot-supervisor] IoT Application started
 [INFO] [02/16/2018 17:23:27.984] [iot-system-akka.actor.default-dispatcher-3] [akka://iot-system/user/iot-supervisor] IoT Application stopped
 [success] Total time: 23 s, completed Feb 16, 2018 5:23:28 PM
+
+
+Part 3. Working with Device Actors
+----------------------------------
+
+This part tells me why Akka chooses "at-most-once delivery", leaving the
+guarantee of delivery to the application itself, i.e., to me.
+
+Also the first test suite for the IoT app is provided. Since the
+tutorial doc does not fully address the test code (Although the github
+reference uses `AkkaSpec` for testing, it currently seems deprecated), I
+visit the github repository[1] and the documentation on testing[2].
+
+[1] github.com/akka/akka/blob/master/akka-docs/src/test/scala/tutorial_3/DeviceSpec.scala
+[2] doc.akka.io/docs/akka/current/testing.html
+
+
+sbt:IoT> testOnly tutorial.DeviceSpec
+[INFO] [02/17/2018 12:45:05.193] [part3system-akka.actor.default-dispatcher-3] [akka://part3system/user/$a] Device actor group-device started
+[INFO] [02/17/2018 12:45:05.230] [part3system-akka.actor.default-dispatcher-5] [akka://part3system/user/$a] Device actor group-device stopped
+[info] DeviceSpec:
+[info] Device actor
+[info] - must reply with empty reading if no temperature is known
+[info] Run completed in 717 milliseconds.
+[info] Total number of tests run: 1
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 1 s, completed Feb 17, 2018 12:45:05 PM
