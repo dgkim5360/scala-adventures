@@ -412,3 +412,35 @@ sbt:IoT> testOnly tutorial.DeviceGroupSpec
 [info] Tests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [success] Total time: 1 s, completed Feb 17, 2018 4:40:09 PM
+
+
+Part 5. Querying Device Groups
+------------------------------
+
+Here it tries a whole different thing: The new actor design for querying
+behaviors. On the way to achieve that, it introduces a cool scheduler
+feature of Akka and how it delegates `Receive` with a custom function
+for deliberated actor works using `context.become`. Also this part
+emphasizes the value of immutable data transfer.
+
+Below are some references for Scala features or data types:
+* `sealed trait`
+https://stackoverflow.com/questions/11203268/what-is-a-sealed-trait
+* `Map` again
+https://docs.scala-lang.org/overviews/collections/maps.html
+
+
+sbt:IoT> testOnly tutorial.DeviceGroupQuerySpec
+[info] DeviceGroupQuerySpec:
+[info] DeviceGroupQuery actor
+[info] - must return temperature value for working devices
+[info] - must return TemperatureNotAvailable for devices with no reading
+[info] - must return DeviceNotAvailable if device stops before answering
+[info] - must return temperature reading even if device stops after answering
+[info] - must return DeviceTimeOut if device does not answer in time
+[info] Run completed in 1 second, 672 milliseconds.
+[info] Total number of tests run: 5
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 2 s, completed Feb 18, 2018 11:43:40 AM
