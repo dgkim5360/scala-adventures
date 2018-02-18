@@ -18,6 +18,8 @@ Also note that there is no IDE-specific instructions: No Eclipse or
 IntelliJ, just sbt (I don't find reasons to take efforts for learning
 any IDE which I am not sure to use beyond this tutorial).
 
+You may proceed this course tag-by-tag.
+
 
 Installation
 ============
@@ -465,3 +467,29 @@ sbt:IoT> testOnly tutorial.DeviceGroupSpec
 
 The official tutorial for IoT application comes to the end here. Great
 job, me (and you)!
+
+
+Future Work
+===========
+
+This is the end of what I have done for learning Scala and Akka so far,
+but I think there is more for such tutorial things with the language
+itself or frameworks.
+
+I just leave some references which seem worth, some of which may be the
+next content I give a chance to take.
+
+* Scala
+https://twitter.github.io/scala_school
+https://github.com/scala-exercises/scala-exercises
+
+* Akka
+https://doc.akka.io/docs/akka/current/general/index.html
+https://doc.akka.io/docs/akka/current/howto.html
+
+I am wandering around Play and Spark, which are very popular frameworks
+built on Scala, but I am not sure these are appropriate materials for a
+Scala beginner. Also Play is built on Akka and has less to learn
+about the core of language aspects.
+
+Any suggestion will be appreciated! Please guide me :)
