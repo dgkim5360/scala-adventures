@@ -2,6 +2,8 @@ package tutorial
 
 import akka.actor.{ Actor, ActorLogging, Props, ActorRef, Terminated }
 
+import scala.concurrent.duration._
+
 object DeviceGroup {
   def props(groupId: String): Props = Props(new DeviceGroup(groupId))
 
@@ -54,5 +56,13 @@ class DeviceGroup(groupId: String) extends Actor with ActorLogging {
       log.info("Device actor for {} has been terminated", deviceId)
       actorToDeviceId -= deviceActor
       deviceIdToActor -= deviceId
+
+    case DeviceGroup.RequestAllTemperatures(requestId) =>
+      context.actorOf(DeviceGroupQuery.props(
+        actorToDeviceId = actorToDeviceId,
+        requestId = requestId,
+        requester = sender(),
+        3.seconds
+      ))
   }
 }

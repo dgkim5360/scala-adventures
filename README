@@ -444,3 +444,24 @@ sbt:IoT> testOnly tutorial.DeviceGroupQuerySpec
 [info] Tests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [success] Total time: 2 s, completed Feb 18, 2018 11:43:40 AM
+
+sbt:IoT> testOnly tutorial.DeviceGroupSpec
+# A lot of log messages from actor lifecycle hooks are not attached here.
+[info] DeviceGroupSpec:
+[info] DeviceGroup actor
+[info] - must be able to register a device actor
+[info] - must ignore requests in wrong groupId
+[info] - must return same actor for same deviceId
+[info] - must be able to list active devices
+[info] - must be able to list active devices after one shuts down
+[info] - must be able to collect temperatures from all active devices
+[info] Run completed in 1 second, 156 milliseconds.
+[info] Total number of tests run: 6
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 6, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[success] Total time: 2 s, completed Feb 18, 2018 3:43:49 PM
+
+
+The official tutorial for IoT application comes to the end here. Great
+job, me (and you)!
